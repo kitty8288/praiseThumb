@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大拇指点赞</title>
+</head>
+<style>
+    .mainBox {
+        width: 300px;
+        height: 300px;
+
+        margin: 120px auto;
+    }
+
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .mt20 {
+        margin-top: 20px;
+    }
+    .pariseThumb.off .b1,.pariseThumb.off .b2,.pariseThumb.off .b2::before{
+        background-color: #ccc;
+
+    }
+    .b1 {
+        background-color: #0185E2;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        width: 30px;
+        height: 80px;
+    }
+
+    .b2 {
+        width: 100px;
+        height: 80px;
+        margin-left: 5px;
+        border-bottom-left-radius: 25px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 25px;
+        background-color: #0185E2;
+        position: relative;
+    }
+
+    .b2::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -80%;
+        left: 0;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 50px;
+        width: 38px;
+        height: 80%;
+        background-color: #0185E2;
+    }
+</style>
+
+<body>
+    <div class="mainBox flex-center flex-column">
+        <div class="pariseThumb flex-center off">
+        <!-- 衣袖部分 -->
+            <div class="b1"></div>
+            <!-- 手指部分 -->
+            <div class="b2"></div>
+        </div>
+        <!-- 点赞次数记录 -->
+        <div class="count mt20">点赞次数为0次</div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/systemjs/0.21.3/system.js"></script>
+<script src="./index.js"></script>
+
+</html>
+<!-- <script>
+    var i=0;
+    $('.pariseThumb').click(function  () {
+    i++;
+    $('.count').text(i)
+    })
+</script> -->
+<script>
+       SystemJS.config({
+            baseURL: '/scripts'
+        });
+        SystemJS.import('index.js').then(function (m) {
+            console.log(m);
+            //console.log(m.default);
+            $.extend({
+                thumb: m.default
+            });
+            //console.log(thumb);
+            //console.log($.thumb);
+            callBack();
+        });
+
+        function callBack() {
+            var f = new $.thumb(0, $('.pariseThumb'));
+            f.clickAction();
+        }
+</script>
